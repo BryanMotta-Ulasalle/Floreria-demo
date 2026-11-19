@@ -2,6 +2,9 @@ import { backup } from './data.js'
 import { sources, refreshMs, timeoutMs } from './config.js'
 
 export const money = cents => new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN' }).format(cents / 100)
+export function whatsappLink(phone, message) {
+  return /^[1-9]\d{7,14}$/.test(phone ?? '') ? 'https://wa.me/' + phone + '?text=' + encodeURIComponent(message) : null
+}
 export function parseCsv(text) {
   if (typeof text !== 'string' || text.length > 1000000) throw Error('Respuesta inválida')
   const rows = []; let row = [], value = '', quoted = false, closed = false

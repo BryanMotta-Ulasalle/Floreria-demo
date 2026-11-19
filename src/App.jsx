@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { backup, demoMode, imageFor, valuesOf } from './data.js'
-import { money, orderMessage, priceCents, resolveItems } from './content.js'
+import { money, orderMessage, priceCents, resolveItems, whatsappLink } from './content.js'
+import { testWhatsApp } from './config.js'
 import { useContent } from './useContent.js'
 
 function Icon({ name, size = 22, ...props }) {
@@ -50,7 +51,8 @@ export default function App() {
   const count = items.reduce((sum, item) => sum + item.quantity, 0)
   const subtotal = included.reduce((sum, item) => sum + (item.consultar_precio === 'NO' ? priceCents(item.precio) * item.quantity : 0), 0)
   const hasCustom = included.some(item => item.consultar_precio === 'SI')
-  const message = orderMessage(business, items, details)
+  const message = (demoMode ? '[PRUEBA · DEMO LIRIA]\n\n' : '') + orderMessage(business, items, details)
+  const whatsappUrl = whatsappLink(demoMode ? testWhatsApp : business.whatsapp, message)
   const stale = Object.entries(content).filter(([, value]) => value.stale)
   const activeCategory = category === 'todos' || categories.some(item => item.id === category) ? category : 'todos'
   const filtered = useMemo(() => products.filter(product => (activeCategory === 'todos' || product.categoria === activeCategory) && (product.nombre + ' ' + product.descripcion).toLocaleLowerCase('es').includes(query.toLocaleLowerCase('es').trim())).sort((a,b) => {
@@ -132,7 +134,7 @@ export default function App() {
           <label>¿Algo más que debamos saber? <span>(opcional)</span><textarea rows="2" placeholder="Ocasión, colores o preferencias" maxLength={300} value={details.notas} onChange={event => updateDetail('notas', event.target.value)}/></label>
           <button className="button button-primary full-width" disabled={!included.length} type="submit"><Icon name="chat" size={19}/>Vista previa del mensaje</button>
         </form>
-        {preview && <div className="message-preview" role="region" aria-label="Vista previa del mensaje"><h3>Así se verá tu mensaje</h3><textarea aria-label="Mensaje preparado" rows="9" readOnly value={message}/>{!demoMode && business.whatsapp ? <a className="button button-primary full-width" href={'https://wa.me/' + business.whatsapp + '?text=' + encodeURIComponent(message)} target="_blank" rel="noreferrer">Abrir WhatsApp</a> : <p>Esta es una demostración. No se enviará ningún pedido. Al adaptar la web se conecta el WhatsApp del negocio.</p>}</div>}
+        {preview && <div className="message-preview" role="region" aria-label="Vista previa del mensaje"><h3>Así se verá tu mensaje</h3><textarea aria-label="Mensaje preparado" rows="9" readOnly value={message}/>{whatsappUrl ? <><a className="button button-primary full-width" href={whatsappUrl} target="_blank" rel="noreferrer">{demoMode ? 'Abrir WhatsApp de prueba' : 'Abrir WhatsApp'}</a>{demoMode && <p>El mensaje se dirige al número de prueba de Bryan. Revísalo y envíalo desde WhatsApp si deseas probarlo. No es un pedido a una florería.</p>}</> : <p>El WhatsApp del negocio todavía no está configurado.</p>}</div>}
       </>}
     </dialog>
   </>

@@ -1,10 +1,18 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { backup, imageFor, valuesOf } from '../src/data.js'
-import { parseSection, validateSection, priceCents, loadSection, resolveItems, orderMessage } from '../src/content.js'
+import { parseSection, validateSection, priceCents, loadSection, resolveItems, orderMessage, whatsappLink } from '../src/content.js'
 
 const csvFor = (section, rows = backup[section]) => [Object.keys(backup[section][0]), ...rows.map(row => Object.keys(backup[section][0]).map(key => row[key]))].map(row => row.map(value => '"' + String(value).replaceAll('"', '""') + '"').join(',')).join('\r\n')
 const storage = () => { const map = new Map(); return { getItem: key => map.get(key) ?? null, setItem: (key,value) => map.set(key,value), map } }
+test('WhatsApp prepara el destino peruano y codifica saltos, acentos y símbolos', () => {
+  const message = '[PRUEBA · DEMO LIRIA]\nPara ti & para mí'
+  const link = new URL(whatsappLink('51964527152', message))
+  assert.equal(link.origin, 'https://wa.me')
+  assert.equal(link.pathname, '/51964527152')
+  assert.equal(link.searchParams.get('text'), message)
+  for (const phone of ['', '+51 964527152', 'javascript:alert(1)', undefined]) assert.equal(whatsappLink(phone, message), null)
+})
 test('las seis plantillas cumplen sus esquemas y hacen ida y vuelta por CSV', () => {
   for (const section of Object.keys(backup)) assert.deepEqual(parseSection(section, csvFor(section)), validateSection(section, backup[section]))
 })

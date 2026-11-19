@@ -11,3 +11,5 @@ export const sources = {
 }
 export const refreshMs = 10 * 60 * 1000
 export const timeoutMs = 8000
+// Destino autorizado para probar esta demo; no es el teléfono de una florería.
+export const testWhatsApp = '51964527152'

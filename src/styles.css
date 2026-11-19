@@ -10,3 +10,6 @@
 .product-tag{font-size:.75rem}.catalog-meta{font-size:.8125rem}.order-items small,.message-preview>p{font-size:.875rem}
 .brand>span{max-width:225px;overflow-wrap:anywhere}.product-heading{align-items:flex-start}.product h3{overflow-wrap:anywhere}
 @media(max-width:760px){.gesture-inner{gap:12px}.gesture-inner span{font-size:.75rem;flex-direction:column;text-align:center;line-height:1.45}.product-heading{gap:8px}.product h3{font-size:1.35rem}.product>p{font-size:.9375rem}.product-tag{font-size:.65rem}.catalog-meta{font-size:.75rem}.sort{font-size:.75rem}.form-row{grid-template-columns:1fr;gap:0}.brand>span{max-width:155px}.section-heading h2{font-size:2.6rem}}
+/* Reserva espacio sobre la insignia del alojamiento y la zona segura del móvil. */
+.floating-cart{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+body:has(.floating-cart) .demo-ribbon{padding-bottom:calc(160px + env(safe-area-inset-bottom,0px))}
