@@ -13,7 +13,7 @@ El libro editable contiene una guía y seis pestañas de datos. También hay CSV
 1. Publica **Productos**, **Categorias**, **Negocio**, **Portada**, **Informacion** y **Preguntas** por separado como CSV en Archivo > Compartir > Publicar en la Web. Activa la republicación automática.
 2. Copia cada enlace en su entrada correspondiente de `src/config.js`. Publicar las seis pestañas implica configurar seis enlaces; es una operación inicial por cliente.
 3. Despliega. Las siguientes ediciones en la hoja no requieren desplegar otra vez. Mantén la misma hoja y pestañas; sustituir sus enlaces sí requiere cambiar la configuración.
-4. Comprueba los datos desde la web con la hoja publicada. Productos ya está conectado al CSV público recibido del propietario, con seis registros válidos. Negocio, Portada, Categorias, Informacion y Preguntas conservan el contenido incluido hasta configurar sus cinco enlaces. No hace falta conectar una cuenta ni exponer credenciales.
+4. Comprueba los datos desde la web con la hoja publicada. Las seis pestañas ya están conectadas a los CSV públicos recibidos del propietario: Productos (6), Categorias (4), Negocio (8), Portada (8), Informacion (4) y Preguntas (4). No hace falta conectar una cuenta ni exponer credenciales. La copia incluida se conserva como respaldo.
 
 ### Productos y categorías
 
@@ -52,6 +52,6 @@ La demo incluye `noindex,nofollow`, robots y cabecera X-Robots-Tag para no compe
 
 ## Validación
 
-`npm test` cubre los CSV, precios, secciones, claves, caché, datos inválidos, productos nuevos y cambios del pedido. El CSV de Productos se leyó y validó desde el proyecto: seis registros y permiso CORS público. Las otras cinco fuentes están pendientes de sus URLs. El comportamiento visual y el recorrido deben revisarse en escritorio y móvil antes de entregar a un negocio.
+`npm test` cubre los CSV, precios, secciones, claves, caché, datos inválidos, productos nuevos y cambios del pedido. Los seis CSV se leyeron y validaron desde el proyecto, con permiso CORS público. El comportamiento visual y el recorrido deben revisarse en escritorio y móvil antes de entregar a un negocio.
 
 Estado de esta entrega (19 de noviembre de 2026): siete pruebas automáticas y compilación correctas. Libro exportado y sus siete pestañas revisadas mediante imágenes. La revisión de la web mediante capturas quedó pendiente: el navegador de pruebas no alcanzó el servidor local y la publicación privada requiere iniciar sesión. No se ha verificado visualmente el recorrido ni la navegación por teclado. La vista privada guardada está en https://liria-floral-demo-bryan.buddingostrich.chatgpt.site y no es un enlace público para prospectos. El proyecto sigue preparado para desplegarlo por separado en Netlify.
