@@ -1,0 +1,7 @@
+﻿"id","nombre","descripcion","precio","categoria","disponible","visible","destacado","orden","imagen","consultar_precio"
+"brisa","Brisa de primavera","Tonos suaves, rosas y follaje. Un gesto delicado que se queda.","129","romance","SI","SI","SI","1","rosas","NO"
+"luz","Un poquito de luz","Una composición alegre para celebrar sus mejores días.","95","celebrar","SI","SI","SI","2","alegria","NO"
+"tulipanes","Domingo en flor","Tulipanes rosados para hacer especial un día cualquiera.","110","cotidiano","SI","SI","NO","3","portada","NO"
+"abrazo","Un abrazo en flores","Un arreglo de tonos cálidos para decir: estoy contigo.","145","romance","SI","SI","SI","4","romance","NO"
+"calma","Poquito de calma","Flores claras y verdes naturales. Sencillo, sereno, especial.","89","cotidiano","NO","SI","NO","5","blanco","NO"
+"a-tu-manera","Tu historia, en flores","Cuéntanos la ocasión, tus colores y lo que quieres expresar.","","especial","SI","SI","NO","6","taller","SI"

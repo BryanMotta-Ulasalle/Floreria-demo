@@ -1,0 +1,5 @@
+﻿"id","pregunta","respuesta","visible","orden"
+"comprar","¿Cómo hago un pedido?","Elige tus arreglos, revisa tu pedido y completa los detalles de entrega. En un negocio conectado, el mensaje se abre en WhatsApp para confirmar disponibilidad y pago. En esta demo puedes ver el mensaje sin enviarlo.","SI","1"
+"fecha","¿Puedo elegir el día de entrega?","Sí, puedes indicar la fecha que prefieres. La florería debe confirmar la disponibilidad y el horario antes de aceptar el pedido.","SI","2"
+"foto","¿El arreglo será igual al de la foto?","Las fotografías de esta demostración son referenciales. En un negocio real, las flores y tonalidades pueden variar según temporada, siempre con coordinación previa.","SI","3"
+"personalizar","¿Puedo pedir algo personalizado?","Claro. Elige «Tu historia, en flores» y añade tus colores, ocasión y preferencias en las notas del pedido para solicitar una cotización.","SI","4"
