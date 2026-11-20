@@ -2,9 +2,22 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { backup, imageFor } from '../src/data.js'
 import { validateSection, parseSection, loadSection } from '../src/content.js'
-import { cloudinaryImageUrl } from '../src/imageSource.js'
+import { cloudinaryImageUrl, optimizedCloudinaryImage } from '../src/imageSource.js'
 
 const url = 'https://res.cloudinary.com/demo/image/upload/f_auto,q_auto,w_900/sample.jpg'
+test('optimiza originales versionados, carpetas y miniaturas sin cambiar el enlace guardado', () => {
+  const original = 'https://res.cloudinary.com/mi-cuenta/image/upload/v123/catalogo/rosas.jpg'
+  assert.equal(optimizedCloudinaryImage(original), 'https://res.cloudinary.com/mi-cuenta/image/upload/c_limit,w_900/q_auto/f_auto/v123/catalogo/rosas.jpg')
+  assert.ok(optimizedCloudinaryImage(original, 180).includes('/c_limit,w_180/'))
+  assert.equal(cloudinaryImageUrl(original), original)
+  assert.equal(optimizedCloudinaryImage('rosas'), '')
+  assert.equal(optimizedCloudinaryImage('https://example.com/foto.jpg'), '')
+})
+test('la reducción final respeta transformaciones previas y no rompe URLs firmadas', () => {
+  assert.equal(optimizedCloudinaryImage('https://res.cloudinary.com/demo/image/upload/c_fill,w_2000,h_2000/sample.jpg'), 'https://res.cloudinary.com/demo/image/upload/c_fill,w_2000,h_2000/c_limit,w_900/q_auto/f_auto/sample.jpg')
+  const signed = 'https://res.cloudinary.com/demo/image/upload/s--firma--/v123/sample.jpg'
+  assert.equal(optimizedCloudinaryImage(signed), signed)
+})
 test('una URL pública de Cloudinary pasa del CSV al catálogo y a la caché', async () => {
   const product = { ...backup.productos[0], imagen: url }
   const headers = Object.keys(product)

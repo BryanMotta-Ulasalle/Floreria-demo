@@ -20,3 +20,9 @@ No hay que volver a desplegar Liria al cambiar una URL en la hoja. Los archivos 
 Si la columna imagen tiene un desplegable que rechaza valores distintos de las claves locales, quitar únicamente esa validación en Google Sheets (Datos > Validación de datos), o configurarla para advertir sin rechazar. Conservar las validaciones de las demás columnas.
 
 Verificado el 20/11/2026: once pruebas automatizadas y compilación aprobadas. En navegador se comprobó una URL pública de Cloudinary con transformaciones, una imagen local, el respaldo ante un 404 y la recuperación al sustituirlo por una URL válida. La vista temporal usada para esta comprobación no se incluye en la publicación. No se modificó la hoja compartida ni se creó una cuenta Cloudinary.
+
+## Optimización automática
+
+El cliente pega el enlace original. Al mostrarlo, Liria solicita una versión con ancho máximo de 900 px en el catálogo y 180 px en las miniaturas del pedido, sin ampliar imágenes pequeñas. Cloudinary aplica calidad y formato automáticos (q_auto y f_auto). Se conserva el encuadre de transformaciones previas. El enlace guardado en Sheets y el original de Cloudinary no se modifican. Las URLs firmadas se conservan intactas porque requieren una nueva firma para modificar sus transformaciones. La reducción de descarga no reduce el almacenamiento del original ni elimina los límites de transformación y transferencia de Cloudinary.
+
+Verificación de optimización: trece pruebas y compilación aprobadas. En la página real de Liria, la foto de Cloudinary publicada en Sheets se solicita con c_limit,w_900/q_auto/f_auto y carga correctamente. La miniatura del mismo producto carga con ancho real de 180 píxeles. La imagen de muestra tiene 864 píxeles de ancho y no se amplía. Captura en outputs/liria-cloudinary/optimizacion.jpg.
