@@ -1,3 +1,4 @@
+import { cloudinaryImageUrl } from './imageSource.js'
 // Contenido ficticio de la demostración. Se conserva como respaldo por sección.
 export const backup = {
   negocio: [
@@ -48,8 +49,8 @@ export const backup = {
   ],
 }
 
-// Fotografías administradas por el desarrollador; la hoja solo elige una clave.
+// La hoja admite claves locales o enlaces HTTPS públicos de Cloudinary.
 export const images = Object.fromEntries(['rosas', 'portada', 'alegria', 'romance', 'blanco', 'taller'].map(key => [key, '/media/' + key + '.jpg']))
-export const imageFor = key => Object.hasOwn(images, key) ? images[key] : '/media/pendiente.svg'
+export const imageFor = key => cloudinaryImageUrl(key) || (Object.hasOwn(images, key) ? images[key] : '/media/pendiente.svg')
 export const valuesOf = rows => Object.fromEntries(rows.map(row => [row.clave, row.valor]))
 export const demoMode = true // Se cambia a false únicamente al entregar a un negocio real.

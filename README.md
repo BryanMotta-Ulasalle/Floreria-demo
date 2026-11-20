@@ -24,7 +24,7 @@ Añadir un producto es agregar una fila completa con un id único y estable. Usa
 - `disponible`: NO conserva la tarjeta como agotada e impide añadirla.
 - `visible`: NO oculta el producto. Una categoría oculta oculta sus productos.
 - `destacado`: SI lo adelanta en «Nuestra selección». Después se respeta `orden`. El visitante también puede ordenar por menor precio.
-- `imagen`: clave de una fotografía cargada por el desarrollador. Las claves iniciales son rosas, portada, alegria, romance, blanco y taller. Una clave nueva o vacía usa la ilustración. No acepta URLs ni subidas.
+- `imagen`: clave de una fotografía cargada por el desarrollador. Las claves iniciales son rosas, portada, alegria, romance, blanco y taller. También acepta enlaces públicos HTTPS de Cloudinary con formato https://res.cloudinary.com/tu-cuenta/image/upload/... . Una clave desconocida o una imagen que no carga usa la ilustración de respaldo. No requiere API keys. Véase docs/cloudinary.md.
 
 El libro ofrece listas SI/NO, categorías e imágenes y reserva validaciones para las primeras 500 filas de datos. La web admite hasta 500 registros por sección, ids de hasta 64 caracteres, nombres de 100 y descripciones de 300. Si se exceden las filas con validaciones, revisa manualmente o extiende las reglas en Sheets.
 

@@ -1,5 +1,6 @@
 import { backup } from './data.js'
 import { sources, refreshMs, timeoutMs } from './config.js'
+import { cloudinaryImageUrl } from './imageSource.js'
 
 export const money = cents => new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN' }).format(cents / 100)
 export function whatsappLink(phone, message) {
@@ -41,7 +42,7 @@ export function validateSection(section, rows) {
     if (!(row.id !== undefined ? idValid(key) : /^[a-z]+(?:_[a-z]+)*$/.test(key)) || ids.has(key)) throw Error('Identificador inválido o duplicado')
     ids.add(key)
     for (const [field, value] of Object.entries(row)) {
-      const limit = field === 'nombre' ? 100 : field === 'pregunta' ? 140 : ['descripcion', 'ayuda'].includes(field) ? 300 : 650
+      const limit = field === 'imagen' ? 2048 : field === 'nombre' ? 100 : field === 'pregunta' ? 140 : ['descripcion', 'ayuda'].includes(field) ? 300 : 650
       if (value.length > limit) throw Error('Texto demasiado largo')
       if (['visible', 'disponible', 'destacado', 'consultar_precio'].includes(field) && !yesNo(value)) throw Error('Usa SI o NO')
     }
@@ -51,7 +52,7 @@ export function validateSection(section, rows) {
       if (!idValid(row.categoria)) throw Error('Categoría inválida')
       if (row.consultar_precio === 'NO') priceCents(row.precio)
       else if (row.precio) priceCents(row.precio)
-      if (row.imagen && !idValid(row.imagen)) throw Error('Clave de imagen inválida')
+      if (row.imagen && !idValid(row.imagen) && !cloudinaryImageUrl(row.imagen)) throw Error('Usa una clave de imagen o un enlace HTTPS público de Cloudinary')
     }
     if (section === 'preguntas' && (!row.pregunta || !row.respuesta)) throw Error('Pregunta vacía')
     return row
